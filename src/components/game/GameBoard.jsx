@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import GameSquare from './GameSquare';
 
-function GameBoard({ gameSize, xIsNext, squares, onPlay, highLightList, setHightLightList }) {
+function GameBoard({ gameSize, xIsNext, squares, onPlay, highLightList, setHightLightList, setLocations }) {
 	const [gameRow, setGameRow] = useState(Array(gameSize).fill(null));
 	const [winner, setWinner] = useState(null);
 
     function handleClick(i) {
 		setHightLightList([]);
+		setLocations(prev => [...prev, `(${parseInt(i / 3)}, ${i % 3})`])
+
 		if(winner || squares[i]) {
 			return;
 		}
@@ -36,7 +38,6 @@ function GameBoard({ gameSize, xIsNext, squares, onPlay, highLightList, setHight
         for (let i = 0; i < lines.length; i++) {
           	const [a, b, c] = lines[i];
           	if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-				console.log("WINNNNNN");
 				setHightLightList(lines[i])
 				return squares[a];
           	}

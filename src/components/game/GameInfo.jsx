@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
-function GameInfo({ history, currentMove, setCurrentMove, setHightLightList }) {
+function GameInfo({ history, currentMove, setCurrentMove, setHightLightList, locations }) {
     const [isAscendingSorted, setIsAscendingSorted] = useState(true);
 
     function jumpTo(nextMove) {
@@ -11,10 +11,11 @@ function GameInfo({ history, currentMove, setCurrentMove, setHightLightList }) {
     function generateHistoryDescription(moveId) {
         if(moveId === 0) {
             return 'Game start!';
-        } else if(moveId === currentMove) {
-            return `You are at move #${moveId}`
+        }        
+        if(moveId === currentMove) {
+            return `You are at move #${moveId}: ${locations[moveId]}`
         }
-        return `Go to move #${moveId}`;
+        return `Go to move #${moveId}: ${locations[moveId]}`;
     }
 
     return (
