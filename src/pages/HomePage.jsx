@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import GameBoard from '../components/game/GameBoard';
 
 function HomePage(props) {
+    const [gameSize, setGameSize] = useState(3);
     const [history, setHistory] = useState([Array(9).fill(null)]);
     const [currentMove, setCurrentMove] = useState(0);
 
@@ -30,7 +31,7 @@ function HomePage(props) {
     return (
         <div className="game">
             <div className="game-board">
-                <GameBoard xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+                <GameBoard gameSize={gameSize} xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
             </div>
             <div className="game-info">
                 <ol>
