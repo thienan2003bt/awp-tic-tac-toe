@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-function GameInfo({ history, currentMove, setCurrentMove }) {
+function GameInfo({ history, currentMove, setCurrentMove, setHightLightList }) {
     const [isAscendingSorted, setIsAscendingSorted] = useState(true);
 
     function jumpTo(nextMove) {
         setCurrentMove(nextMove);
+        setHightLightList([]);
     }
 
     function generateHistoryDescription(moveId) {
