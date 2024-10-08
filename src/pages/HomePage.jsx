@@ -18,19 +18,14 @@ function HomePage(props) {
         setCurrentMove(nextMove);
     }
 
-    const moves = history.map((squares, move) => {
-        let description;
-        if (move > 0) {
-            description = 'Go to move #' + move;
-        } else {
-            description = 'Go to game start';
+    function generateHistoryDescription(moveId) {
+        if(moveId === 0) {
+            return 'Game start!';
+        } else if(moveId === currentMove) {
+            return `You are at move #${moveId}`
         }
-        return (
-        <li key={move}>
-            <button onClick={() => jumpTo(move)}>{description}</button>
-        </li>
-        );
-    });
+        return `Go to move #${moveId}`;
+    }
 
     return (
         <div className="game">
@@ -38,7 +33,20 @@ function HomePage(props) {
                 <GameBoard xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
             </div>
             <div className="game-info">
-                <ol>{moves}</ol>
+                <ol>
+                {history.map((squares, move) => {
+                    const description = generateHistoryDescription(move);
+                    return (
+                        <li key={move}>
+                            {move === currentMove
+                            ? <span>{description}</span>
+                            : <button onClick={() => jumpTo(move)}>{description}</button>
+                            }
+                        </li>
+                    );
+                    })
+                }
+                </ol>
             </div>
         </div>
     );
