@@ -12,7 +12,7 @@ function GameBoard({ gameSize, xIsNext, squares, onPlay }) {
         if (xIsNext) {
           nextSquares[i] = 'X';
         } else {
-          nextSquares[i] = 'O';
+          nextSquares[i] =  'O';
         }
         onPlay(nextSquares);
     }

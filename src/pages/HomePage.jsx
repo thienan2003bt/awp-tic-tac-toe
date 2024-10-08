@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import GameBoard from '../components/game/GameBoard';
+import GameInfo from '../components/game/GameInfo';
 
 function HomePage(props) {
     const [gameSize, setGameSize] = useState(3);
@@ -15,39 +16,13 @@ function HomePage(props) {
         setCurrentMove(nextHistory.length - 1);
     }
 
-    function jumpTo(nextMove) {
-        setCurrentMove(nextMove);
-    }
-
-    function generateHistoryDescription(moveId) {
-        if(moveId === 0) {
-            return 'Game start!';
-        } else if(moveId === currentMove) {
-            return `You are at move #${moveId}`
-        }
-        return `Go to move #${moveId}`;
-    }
-
     return (
         <div className="game">
             <div className="game-board">
                 <GameBoard gameSize={gameSize} xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
             </div>
             <div className="game-info">
-                <ol>
-                {history.map((squares, move) => {
-                    const description = generateHistoryDescription(move);
-                    return (
-                        <li key={move}>
-                            {move === currentMove
-                            ? <span>{description}</span>
-                            : <button onClick={() => jumpTo(move)}>{description}</button>
-                            }
-                        </li>
-                    );
-                    })
-                }
-                </ol>
+                <GameInfo history={history} setHistory={setHistory} currentMove={currentMove} setCurrentMove={setCurrentMove}/>
             </div>
         </div>
     );
